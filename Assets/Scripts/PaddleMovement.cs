@@ -6,6 +6,9 @@ public class PaddleMovement : MonoBehaviour {
     private float speed = 15;
     Vector3 _prevPosition;
     Vector3 vel;
+    bool wallColiderRight = false;
+    bool wallColiderLeft = false;
+
 
     void Update () {
         Move();
@@ -14,13 +17,22 @@ public class PaddleMovement : MonoBehaviour {
 
     void Move()
     {
-        if (Input.GetKey(KeyCode.D))
+        if (wallColiderLeft || !wallColiderRight)
         {
-            transform.Translate(Vector2.right * speed * Time.deltaTime);
+            
+            if (Input.GetKey(KeyCode.D))
+            {
+                transform.Translate(Vector2.right * speed * Time.deltaTime);
+
+            }
         }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            transform.Translate(Vector2.left * speed * Time.deltaTime);
+
+        if (wallColiderRight || !wallColiderLeft)
+        { 
+            if (Input.GetKey(KeyCode.A))
+            {
+                transform.Translate(Vector2.left * speed * Time.deltaTime);
+            }
         }
     }
     void CalculateVelocity ()
@@ -28,20 +40,44 @@ public class PaddleMovement : MonoBehaviour {
          vel = (transform.position - _prevPosition) / Time.deltaTime;
          _prevPosition = transform.position;
 
-        //Debug.Log(vel.x);
     }
 
      private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log(collision.collider.tag);
+
         if (collision.collider.CompareTag("Ball"))
         {
             Rigidbody2D col = collision.collider.attachedRigidbody;
 
-           // Debug.Log(collision.collider.gameObject);
             collision.collider.attachedRigidbody.velocity = new Vector2(
                 col.velocity.x / 2 + vel.x / 3,
                 col.velocity.y
             );
+        }
+
+        if (collision.collider.CompareTag("Wall"))
+        {
+
+            if(collision.collider.transform.position.x > 0)
+            {
+                wallColiderRight = true;
+            }
+            else if (collision.collider.transform.position.x < 0)
+            {
+                wallColiderLeft = true;
+            }
+
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Wall"))
+        {
+            wallColiderLeft = false;
+            wallColiderRight = false;
+            
         }
     }
 }
