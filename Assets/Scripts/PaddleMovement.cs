@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PaddleMovement : MonoBehaviour {
 
-    private float speed = 10;
+    private float speed = 15;
     Vector3 _prevPosition;
     Vector3 vel;
 
@@ -37,7 +37,7 @@ public class PaddleMovement : MonoBehaviour {
         {
             Rigidbody2D col = collision.collider.attachedRigidbody;
 
-            Debug.Log(collision.collider.gameObject);
+           // Debug.Log(collision.collider.gameObject);
             collision.collider.attachedRigidbody.velocity = new Vector2(
                 col.velocity.x / 2 + vel.x / 3,
                 col.velocity.y
