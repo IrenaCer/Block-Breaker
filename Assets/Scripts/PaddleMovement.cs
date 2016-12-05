@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PaddleMovement : MonoBehaviour {
+public class PaddleMovement : MonoBehaviour
+{
 
     private float speed = 15;
     Vector3 _prevPosition;
@@ -44,8 +45,6 @@ public class PaddleMovement : MonoBehaviour {
 
      private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.collider.tag);
-
         if (collision.collider.CompareTag("Ball"))
         {
             Rigidbody2D col = collision.collider.attachedRigidbody;

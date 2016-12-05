@@ -6,7 +6,7 @@ public class BallSpeedLimit : MonoBehaviour
 
     public Rigidbody2D rgbody;
     private float maxSpeed = 10;
-    private float minSpeed = 10;
+    //private float minSpeed = 10;
 
     void FixedUpdate()
     {
