@@ -9,11 +9,18 @@ public class PaddleMovement : MonoBehaviour
     Vector3 vel;
     bool wallColiderRight = false;
     bool wallColiderLeft = false;
+    bool ballLaunched = false;
+
 
     void Update () {
-        Move();
-        CalculateVelocity();
+        if (!ballLaunched)
+        {
+            DestroyJoint();
+        }
 
+        Move();
+        CalculateVelocity();   
+        
     }
 
     void Move()
@@ -78,6 +85,15 @@ public class PaddleMovement : MonoBehaviour
             wallColiderLeft = false;
             wallColiderRight = false;
             
+        }
+    }
+
+    private void DestroyJoint()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+
+            Destroy(GetComponent<FixedJoint2D>());
         }
     }
 }
