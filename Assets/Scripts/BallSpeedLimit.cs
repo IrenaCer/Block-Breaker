@@ -7,13 +7,27 @@ public class BallSpeedLimit : MonoBehaviour
     public Rigidbody2D rgbody;
     private float maxSpeed = 10;
     //private float minSpeed = 10;
+    private bool ballLaunched = false;
 
     void FixedUpdate()
     {
-        if (rgbody.velocity.magnitude > maxSpeed || rgbody.velocity.magnitude < maxSpeed)
+        if (ballLaunched)
         {
-            LimitSpeed();
+            if (rgbody.velocity.magnitude > maxSpeed || rgbody.velocity.magnitude < maxSpeed)
+            {
+                LimitSpeed();
+            }
         }
+        else
+        {
+            rgbody.velocity = Vector2.zero;
+            if (Input.GetKey(KeyCode.Space))
+            {
+                ballLaunched = true;
+                rgbody.AddForce(new Vector2(0,1) * maxSpeed);
+            }
+        }
+        
 
     }
 

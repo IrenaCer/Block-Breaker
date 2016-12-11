@@ -10,14 +10,15 @@ public class PaddleMovement : MonoBehaviour
     bool wallColiderRight = false;
     bool wallColiderLeft = false;
 
-
     void Update () {
         Move();
         CalculateVelocity();
-	}
+
+    }
 
     void Move()
     {
+
         if (wallColiderLeft || !wallColiderRight)
         {
             
