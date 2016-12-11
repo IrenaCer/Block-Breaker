@@ -1,8 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BrickRecolor : MonoBehaviour {
+public class BrickController : MonoBehaviour {
     public int brickStr;
+
+    private Score score;
+    int points = 10;
+    void Start()
+    {
+        GameObject gameControllerObject = GameObject.FindWithTag("GameController");
+        if (gameControllerObject != null)
+        {
+            score = gameControllerObject.GetComponent<Score>();
+        }
+        if (score == null)
+        {
+            //Debug.Log("Reiks mesti error");
+        }
+    }
 
     private void Update()
     {
@@ -25,9 +40,9 @@ public class BrickRecolor : MonoBehaviour {
     {
         if (collision.collider.CompareTag("Ball") && brickStr > 0)
         {
+            score.AddScore(points);
             brickStr--;
             this.tag = "Brick" + brickStr.ToString();
-            Debug.Log(this.tag);
         }
     }
 }
