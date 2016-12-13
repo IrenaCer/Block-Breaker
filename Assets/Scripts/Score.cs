@@ -13,7 +13,7 @@ public class Score : MonoBehaviour {
 
     public void AddScore(int newScore)
     {
-        score += newScore
+        score += newScore;
         UpdateScore();
     }
 

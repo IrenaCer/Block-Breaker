@@ -10,9 +10,11 @@ public class PaddleMovement : MonoBehaviour
     bool wallColiderRight = false;
     bool wallColiderLeft = false;
     bool ballLaunched = false;
-
+    public static KeyCode right = KeyCode.D;
+    public static KeyCode left = KeyCode.A;
 
     void Update () {
+
         if (!ballLaunched)
         {
             DestroyJoint();
@@ -29,7 +31,7 @@ public class PaddleMovement : MonoBehaviour
         if (wallColiderLeft || !wallColiderRight)
         {
             
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(right))
             {
                 transform.Translate(Vector2.right * speed * Time.deltaTime);
 
@@ -38,7 +40,7 @@ public class PaddleMovement : MonoBehaviour
 
         if (wallColiderRight || !wallColiderLeft)
         { 
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(left))
             {
                 transform.Translate(Vector2.left * speed * Time.deltaTime);
             }

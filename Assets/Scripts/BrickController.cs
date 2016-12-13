@@ -6,6 +6,7 @@ public class BrickController : MonoBehaviour {
 
     private Score score;
     int points = 10;
+
     void Start()
     {
         GameObject gameControllerObject = GameObject.FindWithTag("GameController");
@@ -43,6 +44,7 @@ public class BrickController : MonoBehaviour {
             score.AddScore(points);
             brickStr--;
             this.tag = "Brick" + brickStr.ToString();
+
         }
     }
 }
